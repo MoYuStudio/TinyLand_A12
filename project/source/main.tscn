@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://wwpvjmd5lbfq"]
+[gd_scene load_steps=17 format=3 uid="uid://wwpvjmd5lbfq"]
 
 [ext_resource type="MeshLibrary" uid="uid://co2fihrhl0fs4" path="res://resource/bit_resource/mesh_library/main_mesh_library.tres" id="2_k4x4t"]
 [ext_resource type="Texture2D" uid="uid://detgtla4rwd33" path="res://resource/graphics/steam/steam_bg_fin.png" id="3_aojvk"]
@@ -97,6 +97,17 @@ func _physics_process(delta):
 	#global_rotation.y = mouse_movement.x*0.01-300
 	
 		
+"
+
+[sub_resource type="GDScript" id="GDScript_04gv0"]
+script/source = "
+extends DirectionalLight3D
+
+func _ready():
+	pass
+
+func _process(delta):
+	rotation.x += 0.01
 "
 
 [sub_resource type="GDScript" id="GDScript_i6g6p"]
@@ -244,11 +255,14 @@ fov = 85.0
 script = SubResource("GDScript_os8tr")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.683631, 0.729828, 0, -0.729828, 0.683631, 0, 12.8455, -5.25435)
+transform = Transform3D(1, 0, 0, 0, 0.123601, 0.992332, 0, -0.992332, 0.123601, 0, 20.44, -5.25435)
 light_color = Color(0.921569, 0.74902, 0.721569, 1)
-light_energy = 3.797
-light_indirect_energy = 1.895
-light_volumetric_fog_energy = 0.776
+light_energy = 2.979
+light_indirect_energy = 2.596
+light_volumetric_fog_energy = 2.761
+shadow_enabled = true
+directional_shadow_max_distance = 139.0
+script = SubResource("GDScript_04gv0")
 
 [node name="GridMap" type="GridMap" parent="."]
 mesh_library = ExtResource("2_k4x4t")
