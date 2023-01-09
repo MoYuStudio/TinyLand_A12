@@ -307,7 +307,7 @@ script = SubResource("GDScript_i6g6p")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_8dq1e")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="PixalUV(NOT WORK)" type="Sprite2D" parent="."]
 visible = false
 material = SubResource("ShaderMaterial_ch05w")
 use_parent_material = true
