@@ -163,9 +163,12 @@ func _ready():
 					
 				elif get_cell_item (Vector3(x,the_noise+1,z)) == -1:
 					set_cell_item(Vector3(x,the_noise,z),0,0)
+					#if randi_range(0,10) == 2:
+					#	set_cell_item(Vector3(x,the_noise+1,z),4,0)
+					#	set_cell_item(Vector3(x,the_noise,z),0,0)
 				else:
 					set_cell_item(Vector3(x,the_noise,z),1,0)
-					# set_cell_item(Vector3(x,the_noise+1,z),3,0)
+					
 					
 func _process(delta):
 	set_cell_item(Vector3(0,0,0),0,3)
