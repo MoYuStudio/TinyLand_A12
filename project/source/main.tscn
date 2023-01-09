@@ -81,22 +81,9 @@ func _physics_process(delta):
 	position.y += moveing_vel.y
 	position.z += moveing_vel.z
 	
-	#if Input.is_action_pressed('W'):
-	#	global_position.z -= move_speed
-	#elif Input.is_action_pressed('S'):
-	#	global_position.z += move_speed
-	#elif Input.is_action_pressed('D'):
-	#	global_position.x += move_speed
-	#elif Input.is_action_pressed('A'):
-	#	global_position.x -= move_speed
-	#elif Input.MOUSE_MODE_CAPTURED:
-	#	print(Input.MOUSE_MODE_CAPTURED)
-	#var mouse_movement = Vector2(get_viewport().get_mouse_position())
+
 	
-	#global_rotation.x = mouse_movement.y*0.01+200
-	#global_rotation.y = mouse_movement.x*0.01-300
-	
-		
+
 "
 
 [sub_resource type="GDScript" id="GDScript_04gv0"]
