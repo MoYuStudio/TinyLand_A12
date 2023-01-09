@@ -1,7 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://wwpvjmd5lbfq"]
+[gd_scene load_steps=16 format=3 uid="uid://wwpvjmd5lbfq"]
 
-[ext_resource type="ArrayMesh" uid="uid://c4ftb5m1sb50a" path="res://resource/graphics/block/0.obj" id="1_2bcoi"]
-[ext_resource type="MeshLibrary" uid="uid://doigj2o1r5cw2" path="res://resource/bit_resource/mesh_library/mesh_library.tres" id="2_2p0cw"]
+[ext_resource type="MeshLibrary" uid="uid://co2fihrhl0fs4" path="res://resource/bit_resource/mesh_library/main_mesh_library.tres" id="2_k4x4t"]
 [ext_resource type="Texture2D" uid="uid://detgtla4rwd33" path="res://resource/graphics/steam/steam_bg_fin.png" id="3_aojvk"]
 
 [sub_resource type="GDScript" id="GDScript_os8tr"]
@@ -10,24 +9,92 @@ extends Camera3D
 
 var move_speed = 0.2
 
-func _ready():
-	pass
+# cam look
+var minLookAngle : float = -360.0
+var maxLookAngle : float = 360.0
+var lookSensitivity : float = 30.0
 
+# vectors
+var moveing_vel = Vector3()
+var mouse_delta = Vector2()
+
+func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	pass
+	
+func _input(event):
+  
+	if event is InputEventMouseMotion:
+		mouse_delta = event.relative
+		
 func _process(delta):
+  
+	# rotate the camera along the x axis
+	rotation_degrees.x -= mouse_delta.y * lookSensitivity * delta
+
+	# clamp camera x rotation axis
+	rotation_degrees.x = clamp(rotation_degrees.x, minLookAngle, maxLookAngle)
+
+	# rotate the player along their y-axis
+	rotation_degrees.y -= mouse_delta.x * lookSensitivity * delta
+
+	# reset the mouseDelta vector
+	mouse_delta = Vector2()
+
+func _physics_process(delta):
+	
+	# reset the x and z velocity
+	moveing_vel.x = 0
+	moveing_vel.y = 0
+	moveing_vel.z = 0
+  
+	var input = Vector3()
+  
+	# movement inputs
 	if Input.is_action_pressed('W'):
-		global_position.z -= move_speed
-	elif Input.is_action_pressed('S'):
-		global_position.z += move_speed
-	elif Input.is_action_pressed('D'):
-		global_position.x += move_speed
-	elif Input.is_action_pressed('A'):
-		global_position.x -= move_speed
+		input.z -= 1
+	if Input.is_action_pressed('S'):
+		input.z += 1
+	if Input.is_action_pressed('A'):
+		input.x -= 1
+	if Input.is_action_pressed('D'):
+		input.x += 1
+	if Input.is_action_pressed('Space'):
+		input.y += 1
+	if Input.is_action_pressed('Shift'):
+		input.y -= 1
+		
+	input = input.normalized()
+	
+	# get the forward and right directions
+	var forward = global_transform.basis.z
+	var right = global_transform.basis.x
+	
+	var relativeDir = (forward * input.z + right * input.x)
+	
+	# set the velocity
+	moveing_vel.x = relativeDir.x * move_speed
+	moveing_vel.y = input.y * move_speed
+	moveing_vel.z = relativeDir.z * move_speed
+	
+	position.x += moveing_vel.x
+	position.y += moveing_vel.y
+	position.z += moveing_vel.z
+	
+	#if Input.is_action_pressed('W'):
+	#	global_position.z -= move_speed
+	#elif Input.is_action_pressed('S'):
+	#	global_position.z += move_speed
+	#elif Input.is_action_pressed('D'):
+	#	global_position.x += move_speed
+	#elif Input.is_action_pressed('A'):
+	#	global_position.x -= move_speed
 	#elif Input.MOUSE_MODE_CAPTURED:
 	#	print(Input.MOUSE_MODE_CAPTURED)
-	var mouse_movement = Vector2(get_viewport().get_mouse_position())
+	#var mouse_movement = Vector2(get_viewport().get_mouse_position())
 	
-	global_rotation.x = mouse_movement.y*0.02+300
-	global_rotation.y = mouse_movement.x*0.02-300
+	#global_rotation.x = mouse_movement.y*0.01+200
+	#global_rotation.y = mouse_movement.x*0.01-300
 	
 		
 "
@@ -127,18 +194,49 @@ nodes/fragment/connections = PackedInt32Array(2, 0, 4, 0, 3, 0, 4, 1, 4, 0, 5, 0
 shader = SubResource("VisualShader_an6bm")
 shader_parameter/Pixelisation = null
 
+[sub_resource type="GDScript" id="GDScript_i6g6p"]
+script/source = "
+extends GridMap
+
+var board = 64
+var hight = 6
+
+var noise
+var noise_seed = 0
+var octaves = 3 # 4
+var period = 25 # 20.0
+var persistence = 0.8
+
+func _ready():
+	noise = FastNoiseLite.new()
+	#noise = OpenSimplexNoise.new()
+	noise.noise_type = 3
+	#randomize()
+	#noise.seed = noise_seed
+	#noise.fractal_octaves = octaves
+	#noise.frequency = period
+	#noise.fractal_ping_pong_strength = persistence
+	
+	for x in range(board):
+		for y in range(board):
+			for z in range(board):
+				var the_noise = noise.get_noise_3d(x,y,z)*30# +10
+				set_cell_item(Vector3(x,the_noise,z),0,3)
+					
+func _process(delta):
+	set_cell_item(Vector3(0,0,0),0,3)
+"
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_x7yv5"]
+
+[sub_resource type="Sky" id="Sky_hnv5c"]
+sky_material = SubResource("PhysicalSkyMaterial_x7yv5")
+
+[sub_resource type="Environment" id="Environment_8dq1e"]
+background_mode = 2
+sky = SubResource("Sky_hnv5c")
+
 [node name="main" type="Node3D"]
-
-[node name="0" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.44673, -0.430283, 2.34443)
-mesh = ExtResource("1_2bcoi")
-
-[node name="GridMap" type="GridMap" parent="."]
-mesh_library = ExtResource("2_2p0cw")
-cell_size = Vector3(1.6, 1.6, 1.6)
-data = {
-"cells": PackedInt32Array(3, 65529, 0, 3, 65530, 0, 3, 65531, 0, 3, 65532, 0, 3, 65533, 0, 3, 65534, 0, 3, 65535, 0, 3, 0, 0, 2, 65528, 0, 2, 65531, 0, 1, 65531, 0, 0, 65531, 0, 65535, 65532, 0, 65534, 65532, 0, 65533, 65532, 0, 65532, 65532, 0, 65531, 65532, 0, 65531, 65533, 0, 65530, 65533, 0, 65530, 65532, 0, 65531, 65531, 0, 65531, 65530, 0, 65532, 65530, 0, 65533, 65530, 0, 65533, 65529, 0, 65534, 65529, 0, 65534, 65528, 0, 65535, 65528, 0, 65535, 65527, 0, 0, 65527, 0, 4, 65530, 0, 4, 65529, 0, 4, 65528, 0, 3, 65528, 0, 3, 65527, 0, 2, 65527, 0, 2, 65526, 0, 1, 65526, 0, 1, 65525, 0, 7, 3, 262144, 8, 3, 262144, 9, 3, 262144, 10, 4, 262144, 11, 4, 262144, 12, 4, 262144, 12, 5, 262144, 10, 65534, 262144, 10, 65533, 262144, 11, 65531, 262144, 11, 65529, 262144, 11, 65528, 262144, 11, 65527, 262144, 12, 65526, 262144, 12, 65525, 262144, 11, 65524, 262144, 11, 65523, 262144, 11, 65522, 262144, 12, 65521, 262144, 11, 65520, 262144, 11, 65519, 262144, 11, 65518, 262144, 10, 65517, 262144, 9, 65518, 262144, 8, 65518, 262144, 7, 65518, 262144, 5, 65518, 262144, 4, 65519, 262144, 2, 65520, 262144, 2, 65521, 262144, 1, 65521, 262144, 0, 65521, 262144, 0, 65522, 262144, 65535, 65522, 262144, 65534, 65522, 262144, 65533, 65522, 262144, 65533, 65523, 262144, 65532, 65523, 262144, 65532, 65524, 262144, 65531, 65524, 262144, 65531, 65525, 262144, 16, 65526, 262144, 16, 65527, 262144, 16, 65528, 262144, 16, 65529, 262144, 15, 65530, 262144, 15, 65531, 262144, 15, 65532, 262144, 15, 65533, 262144, 14, 65533, 262144, 18, 65532, 262144, 17, 65532, 262144, 16, 65532, 262144, 13, 65533, 262144, 12, 65533, 262144, 12, 65534, 262144, 11, 65534, 262144, 10, 65535, 262144, 9, 65535, 262144, 13, 65534, 262144, 14, 65534, 262144, 13, 65535, 262144, 14, 65535, 262144, 13, 65532, 262144, 13, 65531, 262144, 12, 65531, 262144, 10, 65531, 262144, 10, 65532, 262144)
-}
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.929133, 0.369747, 0, -0.369747, 0.929133, 0.693, 9.675, 2.24)
@@ -159,3 +257,12 @@ use_parent_material = true
 position = Vector2(670.5, 374)
 scale = Vector2(4.36201, 5.4221)
 texture = ExtResource("3_aojvk")
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource("2_k4x4t")
+cell_size = Vector3(1.6, 1.6, 1.6)
+collision_mask = 3
+script = SubResource("GDScript_i6g6p")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_8dq1e")

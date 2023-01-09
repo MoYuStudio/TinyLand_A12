@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://ildidhst2had"]
+
+[ext_resource type="ArrayMesh" uid="uid://c4ftb5m1sb50a" path="res://resource/graphics/block/0.obj" id="1_6cbkg"]
+
+[node name="main_mesh_library_tres" type="Node3D"]
+
+[node name="0" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = ExtResource("1_6cbkg")
