@@ -136,7 +136,7 @@ func _process(delta):
 script/source = "
 extends GridMap
 
-var board = 64
+var board = 128
 var hight = 6
 
 var noise
@@ -157,7 +157,7 @@ func _ready():
 	for x in range(board):
 		for y in range(board):
 			for z in range(board):
-				var the_noise = noise.get_noise_3d(x,y,z)*30# +10
+				var the_noise = noise.get_noise_3d(x,y,z)*16
 				if the_noise <= 0 and get_cell_item (Vector3(x,the_noise-1,z)) == -1:
 					set_cell_item(Vector3(x,the_noise,z),2,0)
 				elif get_cell_item (Vector3(x,the_noise+1,z)) == -1:
