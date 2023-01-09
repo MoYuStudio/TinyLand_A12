@@ -1,9 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://ildidhst2had"]
+[gd_scene load_steps=4 format=3 uid="uid://ildidhst2had"]
 
 [ext_resource type="ArrayMesh" uid="uid://c4ftb5m1sb50a" path="res://resource/graphics/block/0.obj" id="1_6cbkg"]
+[ext_resource type="ArrayMesh" uid="uid://khb2k5lvje65" path="res://resource/graphics/block/1.obj" id="2_80d8r"]
+[ext_resource type="ArrayMesh" uid="uid://sfvvg3eed8f0" path="res://resource/graphics/block/4.obj" id="3_6y7gw"]
 
 [node name="main_mesh_library_tres" type="Node3D"]
 
 [node name="0" type="MeshInstance3D" parent="."]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 mesh = ExtResource("1_6cbkg")
+
+[node name="1" type="MeshInstance3D" parent="."]
+mesh = ExtResource("2_80d8r")
+
+[node name="4" type="MeshInstance3D" parent="."]
+mesh = ExtResource("3_6y7gw")

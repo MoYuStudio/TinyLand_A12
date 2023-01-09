@@ -105,10 +105,12 @@ extends DirectionalLight3D
 
 func _ready():
 	rotation_degrees.x = 0
+	rotation_degrees.y = 0
 
 func _process(delta):
 	#print(rotation_degrees.x)
 	rotation_degrees.x += 0.2
+	rotation_degrees.y += 0.2
 	#if rotation_degrees.x >= 90 and rotation_degrees.x <= 180:
 	#	light_color.b -= 0.003
 	#elif rotation_degrees.x >= -90 and rotation_degrees.x <= 0:
@@ -119,6 +121,8 @@ func _process(delta):
 	#	light_color.b = 150
 	if rotation_degrees.x > 360:
 		rotation_degrees.x = 0
+	if rotation_degrees.y > 360:
+		rotation_degrees.y = 0
 	
 "
 
@@ -127,14 +131,18 @@ script/source = "
 extends DirectionalLight3D
 
 func _ready():
-	rotation_degrees.x = 180
+	rotation_degrees.x = -180
+	rotation_degrees.y = -180
 
 func _process(delta):
 
 	rotation_degrees.x += 0.2
+	rotation_degrees.y += 0.2
 
 	if rotation_degrees.x > 360:
 		rotation_degrees.x = 0
+	if rotation_degrees.y > 360:
+		rotation_degrees.y = 0
 "
 
 [sub_resource type="GDScript" id="GDScript_i6g6p"]
@@ -152,7 +160,6 @@ var persistence = 0.8
 
 func _ready():
 	noise = FastNoiseLite.new()
-	#noise = OpenSimplexNoise.new()
 	noise.noise_type = 3
 	#randomize()
 	#noise.seed = noise_seed
@@ -164,7 +171,12 @@ func _ready():
 		for y in range(board):
 			for z in range(board):
 				var the_noise = noise.get_noise_3d(x,y,z)*30# +10
-				set_cell_item(Vector3(x,the_noise,z),0,3)
+				if the_noise <= 0 and get_cell_item (Vector3(x,the_noise-1,z)) == -1:
+					set_cell_item(Vector3(x,the_noise,z),2,0)
+				elif get_cell_item (Vector3(x,the_noise+1,z)) == -1:
+					set_cell_item(Vector3(x,the_noise,z),0,0)
+				else:
+					set_cell_item(Vector3(x,the_noise,z),1,0)
 					
 func _process(delta):
 	set_cell_item(Vector3(0,0,0),0,3)
@@ -295,7 +307,6 @@ script = SubResource("GDScript_04gv0")
 transform = Transform3D(1, 0, 0, 0, 0.123601, 0.992332, 0, -0.992332, 0.123601, 0, 20.44, -5.25435)
 light_color = Color(0.839216, 0.894118, 1, 1)
 shadow_enabled = true
-sky_mode = 1
 script = SubResource("GDScript_yyiph")
 
 [node name="GridMap" type="GridMap" parent="."]
