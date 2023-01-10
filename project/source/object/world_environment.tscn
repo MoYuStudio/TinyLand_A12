@@ -1,0 +1,90 @@
+[gd_scene load_steps=8 format=3 uid="uid://ye1hxsh2ci36"]
+
+[ext_resource type="Texture2D" uid="uid://d1ls4ges7ofqd" path="res://resource/graphics/sky/sky1.png" id="1_8yu55"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_mjr1u"]
+panorama = ExtResource("1_8yu55")
+filter = false
+
+[sub_resource type="Sky" id="Sky_hnv5c"]
+sky_material = SubResource("PanoramaSkyMaterial_mjr1u")
+
+[sub_resource type="Environment" id="Environment_8dq1e"]
+background_mode = 2
+sky = SubResource("Sky_hnv5c")
+
+[sub_resource type="GDScript" id="GDScript_dm78c"]
+script/source = "extends WorldEnvironment
+
+func _ready():
+	pass
+
+func _process(delta):
+	environment.sky_rotation.y += 0.0001
+"
+
+[sub_resource type="GDScript" id="GDScript_04gv0"]
+script/source = "
+extends DirectionalLight3D
+
+func _ready():
+	rotation_degrees.x = 0
+	rotation_degrees.y = 0
+
+func _process(delta):
+	#print(rotation_degrees.x)
+	rotation_degrees.x += 0.2
+	rotation_degrees.y += 0.2
+	#if rotation_degrees.x >= 90 and rotation_degrees.x <= 180:
+	#	light_color.b -= 0.003
+	#elif rotation_degrees.x >= -90 and rotation_degrees.x <= 0:
+	#	light_color.b -= 0.003
+	#else:
+	#	light_color.b += 0.0015
+	#if rotation_degrees.x == -180:
+	#	light_color.b = 150
+	if rotation_degrees.x > 360:
+		rotation_degrees.x = 0
+	if rotation_degrees.y > 360:
+		rotation_degrees.y = 0
+	
+"
+
+[sub_resource type="GDScript" id="GDScript_yyiph"]
+script/source = "
+extends DirectionalLight3D
+
+func _ready():
+	rotation_degrees.x = -180
+	rotation_degrees.y = -180
+
+func _process(delta):
+
+	rotation_degrees.x += 0.2
+	rotation_degrees.y += 0.2
+
+	if rotation_degrees.x > 360:
+		rotation_degrees.x = 0
+	if rotation_degrees.y > 360:
+		rotation_degrees.y = 0
+"
+
+[node name="WorldEnvironment" type="WorldEnvironment"]
+environment = SubResource("Environment_8dq1e")
+script = SubResource("GDScript_dm78c")
+
+[node name="SunLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.123601, 0.992332, 0, -0.992332, 0.123601, 0, 20.44, -5.25435)
+light_color = Color(0.980392, 0.741176, 0.603922, 1)
+light_energy = 2.0
+light_indirect_energy = 2.596
+light_volumetric_fog_energy = 2.761
+shadow_enabled = true
+directional_shadow_max_distance = 139.0
+script = SubResource("GDScript_04gv0")
+
+[node name="MoonLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.123601, 0.992332, 0, -0.992332, 0.123601, 0, 20.44, -5.25435)
+light_color = Color(0.839216, 0.894118, 1, 1)
+shadow_enabled = true
+script = SubResource("GDScript_yyiph")

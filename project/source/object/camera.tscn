@@ -1,0 +1,89 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqpq2xfqxc1sg"]
+
+[sub_resource type="GDScript" id="GDScript_os8tr"]
+script/source = "
+extends Camera3D
+
+var move_speed = 0.6
+
+# cam look
+var minLookAngle : float = -90.0
+var maxLookAngle : float = 90.0
+var lookSensitivity : float = 30.0
+
+# vectors
+var moveing_vel = Vector3()
+var mouse_delta = Vector2()
+
+func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	pass
+	
+func _input(event):
+  
+	if event is InputEventMouseMotion:
+		mouse_delta = event.relative
+		
+func _process(delta):
+  
+	# rotate the camera along the x axis
+	rotation_degrees.x -= mouse_delta.y * lookSensitivity * delta
+
+	# clamp camera x rotation axis
+	rotation_degrees.x = clamp(rotation_degrees.x, minLookAngle, maxLookAngle)
+
+	# rotate the player along their y-axis
+	rotation_degrees.y -= mouse_delta.x * lookSensitivity * delta
+
+	# reset the mouseDelta vector
+	mouse_delta = Vector2()
+
+func _physics_process(delta):
+	
+	# reset the x and z velocity
+	moveing_vel.x = 0
+	moveing_vel.y = 0
+	moveing_vel.z = 0
+  
+	var input = Vector3()
+  
+	# movement inputs
+	if Input.is_action_pressed('W'):
+		input.z -= 1
+	if Input.is_action_pressed('S'):
+		input.z += 1
+	if Input.is_action_pressed('A'):
+		input.x -= 1
+	if Input.is_action_pressed('D'):
+		input.x += 1
+	if Input.is_action_pressed('Space'):
+		input.y += 1
+	if Input.is_action_pressed('Shift'):
+		input.y -= 1
+		
+	input = input.normalized()
+	
+	# get the forward and right directions
+	var forward = global_transform.basis.z
+	var right = global_transform.basis.x
+	
+	var relativeDir = (forward * input.z + right * input.x)
+	
+	# set the velocity
+	moveing_vel.x = relativeDir.x * move_speed
+	moveing_vel.y = input.y * move_speed
+	moveing_vel.z = relativeDir.z * move_speed
+	
+	position.x += moveing_vel.x
+	position.y += moveing_vel.y
+	position.z += moveing_vel.z
+	
+
+	
+
+"
+
+[node name="Camera" type="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+fov = 85.0
+script = SubResource("GDScript_os8tr")
