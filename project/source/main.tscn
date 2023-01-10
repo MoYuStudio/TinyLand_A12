@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://wwpvjmd5lbfq"]
+[gd_scene load_steps=46 format=3 uid="uid://wwpvjmd5lbfq"]
 
 [ext_resource type="MeshLibrary" uid="uid://co2fihrhl0fs4" path="res://resource/bit_resource/mesh_library/main_mesh_library.tres" id="2_k4x4t"]
 [ext_resource type="Texture2D" uid="uid://d1ls4ges7ofqd" path="res://resource/graphics/sky/sky1.png" id="2_lcwye"]
@@ -186,6 +186,16 @@ sky_material = SubResource("PanoramaSkyMaterial_mjr1u")
 [sub_resource type="Environment" id="Environment_8dq1e"]
 background_mode = 2
 sky = SubResource("Sky_hnv5c")
+
+[sub_resource type="GDScript" id="GDScript_dm78c"]
+script/source = "extends WorldEnvironment
+
+func _ready():
+	pass
+
+func _process(delta):
+	environment.sky_rotation.y += 0.0001
+"
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_fvv84"]
 output_port_for_preview = 0
@@ -476,7 +486,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-498.611, -22.2514)
+graph_offset = Vector2(-594.072, -132.343)
 nodes/vertex/0/position = Vector2(480, 240)
 nodes/vertex/2/node = SubResource("VisualShaderNodeInput_yosy6")
 nodes/vertex/2/position = Vector2(-440, 140)
@@ -562,6 +572,7 @@ script = SubResource("GDScript_i6g6p")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_8dq1e")
+script = SubResource("GDScript_dm78c")
 
 [node name="PixalUV(NOT WORK)" type="Sprite2D" parent="."]
 visible = false
