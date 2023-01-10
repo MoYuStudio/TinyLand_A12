@@ -15,6 +15,8 @@ var octaves = 3 # 4
 var period = 25 # 20.0
 var persistence = 0.8
 
+var collision_point = Vector3(0,0,0)
+
 func _ready():
 	noise = FastNoiseLite.new()
 	noise.noise_type = 3
@@ -42,7 +44,8 @@ func _ready():
 					
 					
 func _process(delta):
-	set_cell_item(Vector3(0,0,0),0,3)
+	var poz = local_to_map(collision_point)
+	set_cell_item(Vector3(poz.x,poz.y+1,poz.z),0,0)
 "
 
 [node name="GridMap" type="GridMap"]

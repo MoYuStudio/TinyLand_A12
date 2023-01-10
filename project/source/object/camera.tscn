@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://bqpq2xfqxc1sg"]
+[gd_scene load_steps=3 format=3 uid="uid://deyci4scpxkr8"]
 
-[sub_resource type="GDScript" id="GDScript_os8tr"]
+[sub_resource type="GDScript" id="GDScript_k0qoa"]
 script/source = "
 extends Camera3D
 
@@ -17,7 +17,18 @@ var mouse_delta = Vector2()
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	pass
+	
+	var mouse_pos = get_viewport().get_mouse_position()
+	var ray_length = 1000
+	var from = project_ray_origin(mouse_pos)
+	var to = from + project_ray_normal(mouse_pos) * ray_length
+	var space = get_world_3d().direct_space_state
+	var ray_query = PhysicsRayQueryParameters3D.new()
+	ray_query.from = from
+	ray_query.to = to
+	ray_query.collide_with_areas = true
+	var raycast_result = space.intersect_ray(ray_query)
+	print(raycast_result)
 	
 func _input(event):
   
@@ -77,13 +88,25 @@ func _physics_process(delta):
 	position.x += moveing_vel.x
 	position.y += moveing_vel.y
 	position.z += moveing_vel.z
-	
+"
 
-	
+[sub_resource type="GDScript" id="GDScript_uaonl"]
+script/source = "
+extends RayCast3D
 
+var collision_point = get_collision_point()
+
+func _ready():
+	pass
+
+func _process(delta):
+	collision_point = get_collision_point()
 "
 
 [node name="Camera" type="Camera3D"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 fov = 85.0
-script = SubResource("GDScript_os8tr")
+script = SubResource("GDScript_k0qoa")
+
+[node name="RayCast" type="RayCast3D" parent="."]
+collide_with_areas = true
+script = SubResource("GDScript_uaonl")
