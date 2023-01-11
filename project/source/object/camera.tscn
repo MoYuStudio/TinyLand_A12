@@ -16,7 +16,7 @@ var moveing_vel = Vector3()
 var mouse_delta = Vector2()
 var mouse_pos = Vector2()
 
-var ray_length = 1000
+var ray_length = 600
 var collision_point = Vector3(0,0,0)
 
 func _ready():
@@ -40,7 +40,7 @@ func _input(event):
 		var raycast = space.intersect_ray(ray_pos)
 		print(raycast)
 		if raycast != {}:
-			print(raycast.values()[0])
+			print(raycast.values()[1])
 			collision_point = Vector3((raycast.values()[0].x),(raycast.values()[0].y),(raycast.values()[0].z))
 		#for i in raycast:
 		#	print(raycast[i])

@@ -1,17 +1,21 @@
-[gd_scene load_steps=7 format=3 uid="uid://dx0eilax2xmbt"]
+[gd_scene load_steps=9 format=3 uid="uid://kopibfgoc8i3"]
 
 [ext_resource type="PackedScene" uid="uid://ye1hxsh2ci36" path="res://source/object/world_environment.tscn" id="1_0t4if"]
 [ext_resource type="PackedScene" uid="uid://deyci4scpxkr8" path="res://source/object/camera.tscn" id="2_7wigx"]
 [ext_resource type="PackedScene" uid="uid://gl3daikwgbaj" path="res://source/object/gridmap.tscn" id="3_bbj6m"]
 [ext_resource type="PackedScene" uid="uid://bmifio0amciep" path="res://source/object/water.tscn" id="4_6wnvc"]
-[ext_resource type="Texture2D" uid="uid://oc3bbne2dnby" path="res://resource/graphics/icon/money_x16.png" id="5_5hmpf"]
+[ext_resource type="Texture2D" uid="uid://do4ks8ackpthp" path="res://resource/graphics/ui/aim_point.png" id="5_632i4"]
+[ext_resource type="Texture2D" uid="uid://cwnjpooy64nlw" path="res://resource/graphics/tile/0.png" id="6_n0si4"]
+[ext_resource type="FontFile" path="res://resource/graphics/font/kenney_pixel_12.tres" id="7_xr1mt"]
 
 [sub_resource type="GDScript" id="GDScript_mah7m"]
 script/source = "
 extends Node3D
 
+var stop_menu
+
 func _ready():
-	pass
+	$GUI/Stop.visible = false
 
 func _process(delta):
 	$GridMap.collision_point = $Camera.collision_point
@@ -20,7 +24,13 @@ func _physics_process(delta):
 	
 	# movement inputs
 	if Input.is_action_pressed('Esc'):
-		get_tree().quit()
+		if stop_menu == false:
+			stop_menu = true
+			$GUI/Stop.visible = true
+		else:
+			stop_menu = false
+			$GUI/Stop.visible = false
+		#get_tree().quit()
 "
 
 [node name="Game" type="Node3D"]
@@ -36,6 +46,51 @@ script = SubResource("GDScript_mah7m")
 
 [node name="GUI" type="CanvasLayer" parent="."]
 
-[node name="MoneyX16" type="Sprite2D" parent="GUI"]
+[node name="AimPoint" type="Sprite2D" parent="GUI"]
+texture_filter = 1
 position = Vector2(320, 180)
-texture = ExtResource("5_5hmpf")
+scale = Vector2(2, 2)
+texture = ExtResource("5_632i4")
+
+[node name="0" type="Sprite2D" parent="GUI"]
+texture_filter = 1
+position = Vector2(599, 38)
+scale = Vector2(2, 2)
+texture = ExtResource("6_n0si4")
+
+[node name="Ver" type="Label" parent="GUI"]
+texture_filter = 1
+offset_left = 259.0
+offset_top = 4.0
+offset_right = 383.0
+offset_bottom = 19.0
+theme_override_fonts/font = ExtResource("7_xr1mt")
+text = "TinyLand A12 a2023011101"
+
+[node name="Stop" type="Control" parent="GUI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 360.0
+
+[node name="ColorRect" type="ColorRect" parent="GUI/Stop"]
+modulate = Color(1, 1, 1, 0.564706)
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+
+[node name="Setting" type="Button" parent="GUI/Stop"]
+layout_mode = 0
+offset_left = 264.0
+offset_top = 103.0
+offset_right = 377.0
+offset_bottom = 144.0
+text = "setting"
+
+[node name="Menu" type="Button" parent="GUI/Stop"]
+layout_mode = 0
+offset_left = 262.0
+offset_top = 155.0
+offset_right = 376.0
+offset_bottom = 196.0
+text = "menu"
