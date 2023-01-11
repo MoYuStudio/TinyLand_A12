@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://blhiffqgf5ppu"]
+[gd_scene load_steps=3 format=3 uid="uid://blhiffqgf5ppu"]
+
+[ext_resource type="FontFile" uid="uid://ckmyjvou4nb1f" path="res://resource/graphics/font/kenney_pixel.ttf" id="1_xvc0f"]
 
 [sub_resource type="GDScript" id="GDScript_l45y7"]
 script/source = "
@@ -24,31 +26,38 @@ offset_bottom = 360.0
 
 [node name="ColorRect" type="ColorRect" parent="."]
 modulate = Color(1, 1, 1, 0.564706)
-layout_mode = 0
+texture_filter = 1
+use_parent_material = true
 offset_right = 640.0
 offset_bottom = 360.0
 
 [node name="Continue" type="Button" parent="."]
-layout_mode = 0
-offset_left = 263.0
-offset_top = 106.0
-offset_right = 376.0
-offset_bottom = 147.0
+texture_filter = 1
+offset_left = 243.0
+offset_top = 100.0
+offset_right = 391.0
+offset_bottom = 141.0
+theme_override_fonts/font = ExtResource("1_xvc0f")
+theme_override_font_sizes/font_size = 32
 text = "Continue"
 script = SubResource("GDScript_l45y7")
 
 [node name="Setting" type="Button" parent="."]
-layout_mode = 0
-offset_left = 262.0
-offset_top = 159.0
-offset_right = 375.0
-offset_bottom = 200.0
+texture_filter = 1
+offset_left = 245.0
+offset_top = 155.0
+offset_right = 391.0
+offset_bottom = 194.0
+theme_override_fonts/font = ExtResource("1_xvc0f")
+theme_override_font_sizes/font_size = 32
 text = "Setting"
 
 [node name="Menu" type="Button" parent="."]
-layout_mode = 0
-offset_left = 262.0
-offset_top = 213.0
-offset_right = 376.0
-offset_bottom = 254.0
+texture_filter = 1
+offset_left = 245.0
+offset_top = 210.0
+offset_right = 392.0
+offset_bottom = 248.0
+theme_override_fonts/font = ExtResource("1_xvc0f")
+theme_override_font_sizes/font_size = 32
 text = "Menu"
