@@ -109,7 +109,7 @@ func _physics_process(delta):
 		position.z += moveing_vel.z
 		
 	elif mouse_lock == false:
-		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
 	
 "

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ildidhst2had"]
+[gd_scene load_steps=9 format=3 uid="uid://ildidhst2had"]
 
 [ext_resource type="ArrayMesh" uid="uid://c4ftb5m1sb50a" path="res://resource/graphics/block/0.obj" id="1_6cbkg"]
 [ext_resource type="ArrayMesh" uid="uid://khb2k5lvje65" path="res://resource/graphics/block/1.obj" id="2_80d8r"]
@@ -11,6 +11,9 @@ roughness = 0.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_v8p7u"]
 size = Vector3(1.6, 1.6, 1.6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3ujwx"]
+albedo_color = Color(1, 0.858824, 0.329412, 1)
 
 [node name="main_mesh_library_tres" type="Node3D"]
 
@@ -38,9 +41,10 @@ shape = SubResource("BoxShape3D_v8p7u")
 [node name="4" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 0)
 mesh = ExtResource("3_6y7gw")
+surface_material_override/0 = SubResource("StandardMaterial3D_3ujwx")
 
 [node name="StaticBody" type="StaticBody3D" parent="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.799516, 2.79803, -0.802393)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.799515, 2.79803, -0.802393)
 
 [node name="CollisionShape" type="CollisionShape3D" parent="4/StaticBody"]
 shape = SubResource("BoxShape3D_v8p7u")

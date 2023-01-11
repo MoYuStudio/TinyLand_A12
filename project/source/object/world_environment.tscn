@@ -12,6 +12,15 @@ sky_material = SubResource("PanoramaSkyMaterial_mjr1u")
 [sub_resource type="Environment" id="Environment_8dq1e"]
 background_mode = 2
 sky = SubResource("Sky_hnv5c")
+fog_light_color = Color(0.517647, 0.552941, 0.607843, 1)
+fog_light_energy = 1.24
+fog_density = 0.1129
+fog_height = 3.48
+fog_height_density = 0.0027
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.01
+volumetric_fog_anisotropy = -0.25
+volumetric_fog_sky_affect = 0.3
 
 [sub_resource type="GDScript" id="GDScript_dm78c"]
 script/source = "extends WorldEnvironment
