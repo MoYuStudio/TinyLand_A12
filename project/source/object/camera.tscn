@@ -41,7 +41,7 @@ func _input(event):
 		print(raycast)
 		if raycast != {}:
 			print(raycast.values()[0])
-			collision_point = Vector3((raycast.values()[0].x),(raycast.values()[0].y),(raycast.values()[0].z-3.2))
+			collision_point = Vector3((raycast.values()[0].x),(raycast.values()[0].y),(raycast.values()[0].z))
 		#for i in raycast:
 		#	print(raycast[i])
 		
