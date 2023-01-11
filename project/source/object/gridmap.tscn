@@ -44,8 +44,9 @@ func _ready():
 					
 					
 func _process(delta):
-	var poz = local_to_map(collision_point)
-	set_cell_item(Vector3(poz.x,poz.y+1,poz.z),0,0)
+	if collision_point != Vector3(0,0,0):
+		var poz = local_to_map(collision_point)
+		set_cell_item(Vector3(poz.x,poz.y,poz.z),0,0)
 "
 
 [node name="GridMap" type="GridMap"]

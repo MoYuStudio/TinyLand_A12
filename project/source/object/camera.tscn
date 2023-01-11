@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://deyci4scpxkr8"]
+[gd_scene load_steps=2 format=3 uid="uid://deyci4scpxkr8"]
 
 [sub_resource type="GDScript" id="GDScript_k0qoa"]
 script/source = "
@@ -15,25 +15,32 @@ var lookSensitivity : float = 30.0
 var moveing_vel = Vector3()
 var mouse_delta = Vector2()
 
+var ray_length = 3000
+var collision_point = Vector3(0,0,0)
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	
-	var mouse_pos = get_viewport().get_mouse_position()
-	var ray_length = 1000
-	var from = project_ray_origin(mouse_pos)
-	var to = from + project_ray_normal(mouse_pos) * ray_length
-	var space = get_world_3d().direct_space_state
-	var ray_query = PhysicsRayQueryParameters3D.new()
-	ray_query.from = from
-	ray_query.to = to
-	ray_query.collide_with_areas = true
-	var raycast_result = space.intersect_ray(ray_query)
-	print(raycast_result)
 	
 func _input(event):
   
 	if event is InputEventMouseMotion:
 		mouse_delta = event.relative
+		
+	if event is InputEventMouseButton and event.pressed and event.button_index == 1:
+		var center = get_viewport().size/2
+		var space = get_world_3d().direct_space_state
+		var ray_pos = PhysicsRayQueryParameters3D.new()
+		ray_pos.from = project_ray_origin(mouse_delta)
+		ray_pos.to = project_position(center, ray_length)
+		ray_pos.exclude = []
+		ray_pos.collision_mask = 1
+		var raycast = space.intersect_ray(ray_pos)
+		print(raycast)
+		if raycast != {}:
+			print(raycast.values()[0])
+			collision_point = Vector3((raycast.values()[0].x),(raycast.values()[0].y),(raycast.values()[0].z-3.2))
+		#for i in raycast:
+		#	print(raycast[i])
 		
 func _process(delta):
   
@@ -90,23 +97,6 @@ func _physics_process(delta):
 	position.z += moveing_vel.z
 "
 
-[sub_resource type="GDScript" id="GDScript_uaonl"]
-script/source = "
-extends RayCast3D
-
-var collision_point = get_collision_point()
-
-func _ready():
-	pass
-
-func _process(delta):
-	collision_point = get_collision_point()
-"
-
 [node name="Camera" type="Camera3D"]
 fov = 85.0
 script = SubResource("GDScript_k0qoa")
-
-[node name="RayCast" type="RayCast3D" parent="."]
-collide_with_areas = true
-script = SubResource("GDScript_uaonl")

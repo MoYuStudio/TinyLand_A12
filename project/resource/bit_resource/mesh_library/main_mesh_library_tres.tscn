@@ -10,6 +10,7 @@
 roughness = 0.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_v8p7u"]
+size = Vector3(1.6, 1.6, 1.6)
 
 [node name="main_mesh_library_tres" type="Node3D"]
 
@@ -19,7 +20,7 @@ material_overlay = SubResource("StandardMaterial3D_uqtac")
 mesh = ExtResource("1_6cbkg")
 
 [node name="StaticBody" type="StaticBody3D" parent="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.802418, 3.12852, -0.820716)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.799516, 2.79803, -0.802393)
 
 [node name="CollisionShape" type="CollisionShape3D" parent="0/StaticBody"]
 shape = SubResource("BoxShape3D_v8p7u")
