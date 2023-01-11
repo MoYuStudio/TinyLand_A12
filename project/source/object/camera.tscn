@@ -19,7 +19,10 @@ var mouse_pos = Vector2()
 var ray_length = 600
 var collision_point = Vector3(0,0,0)
 
+var mouse_lock = true
+
 func _ready():
+	
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 func _input(event):
@@ -46,6 +49,11 @@ func _input(event):
 		#	print(raycast[i])
 		
 func _process(delta):
+	
+	if mouse_lock == true:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	elif mouse_lock == false:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
   
 	# rotate the camera along the x axis
 	rotation_degrees.x -= mouse_delta.y * lookSensitivity * delta

@@ -1,3 +1,54 @@
-[gd_scene format=3 uid="uid://b1rd6kxlw0tos"]
+[gd_scene load_steps=2 format=3 uid="uid://blhiffqgf5ppu"]
 
-[node name="StopMenu" type="Node3D"]
+[sub_resource type="GDScript" id="GDScript_l45y7"]
+script/source = "
+extends Button
+
+var button_click = false
+
+func _ready():
+	pass
+
+func _process(delta):
+	if is_pressed():
+		button_click = true
+	else:
+		button_click = false
+"
+
+[node name="StopMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 360.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0.564706)
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+
+[node name="Continue" type="Button" parent="."]
+layout_mode = 0
+offset_left = 263.0
+offset_top = 106.0
+offset_right = 376.0
+offset_bottom = 147.0
+text = "Continue"
+script = SubResource("GDScript_l45y7")
+
+[node name="Setting" type="Button" parent="."]
+layout_mode = 0
+offset_left = 262.0
+offset_top = 159.0
+offset_right = 375.0
+offset_bottom = 200.0
+text = "Setting"
+
+[node name="Menu" type="Button" parent="."]
+layout_mode = 0
+offset_left = 262.0
+offset_top = 213.0
+offset_right = 376.0
+offset_bottom = 254.0
+text = "Menu"
