@@ -28,8 +28,8 @@ script = SubResource("GDScript_mah7m")
 
 [node name="Water" parent="." instance=ExtResource("4_6wnvc")]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="GUI" type="CanvasLayer" parent="."]
 
-[node name="MoneyX16" type="Sprite2D" parent="CanvasLayer"]
+[node name="MoneyX16" type="Sprite2D" parent="GUI"]
 position = Vector2(320, 180)
 texture = ExtResource("5_5hmpf")

@@ -14,24 +14,27 @@ var lookSensitivity : float = 30.0
 # vectors
 var moveing_vel = Vector3()
 var mouse_delta = Vector2()
+var mouse_pos = Vector2()
 
-var ray_length = 3000
+var ray_length = 1000
 var collision_point = Vector3(0,0,0)
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 func _input(event):
+	if event is InputEventMouse:
+		mouse_pos = event.position
   
 	if event is InputEventMouseMotion:
 		mouse_delta = event.relative
 		
 	if event is InputEventMouseButton and event.pressed and event.button_index == 1:
-		var center = get_viewport().size/2
+		var center = get_viewport().size
 		var space = get_world_3d().direct_space_state
 		var ray_pos = PhysicsRayQueryParameters3D.new()
-		ray_pos.from = project_ray_origin(mouse_delta)
-		ray_pos.to = project_position(center, ray_length)
+		ray_pos.from = project_ray_origin(mouse_pos)
+		ray_pos.to = project_position(mouse_pos, ray_length)
 		ray_pos.exclude = []
 		ray_pos.collision_mask = 1
 		var raycast = space.intersect_ray(ray_pos)
