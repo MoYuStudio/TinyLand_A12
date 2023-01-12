@@ -43,9 +43,9 @@ func _input(event):
 			ray_pos.exclude = []
 			ray_pos.collision_mask = 1
 			var raycast = space.intersect_ray(ray_pos)
-			print(raycast)
+			# print(raycast)
 			if raycast != {}:
-				print(raycast.values()[1])
+				# print(raycast.values()[1])
 				collision_point = Vector3((raycast.values()[0].x),(raycast.values()[0].y),(raycast.values()[0].z))
 			#for i in raycast:
 			#	print(raycast[i])

@@ -52,6 +52,7 @@ offset_bottom = 360.0
 modulate = Color(1, 1, 1, 0.564706)
 texture_filter = 1
 use_parent_material = true
+layout_mode = 0
 offset_left = -649.0
 offset_top = -396.0
 offset_right = 1304.0
@@ -59,6 +60,7 @@ offset_bottom = 729.0
 
 [node name="Continue" type="Button" parent="."]
 texture_filter = 1
+layout_mode = 0
 offset_left = 243.0
 offset_top = 100.0
 offset_right = 391.0
@@ -70,6 +72,7 @@ script = SubResource("GDScript_l45y7")
 
 [node name="Setting" type="Button" parent="."]
 texture_filter = 1
+layout_mode = 0
 offset_left = 245.0
 offset_top = 155.0
 offset_right = 391.0
@@ -81,6 +84,7 @@ script = SubResource("GDScript_keetg")
 
 [node name="Menu" type="Button" parent="."]
 texture_filter = 1
+layout_mode = 0
 offset_left = 245.0
 offset_top = 210.0
 offset_right = 392.0

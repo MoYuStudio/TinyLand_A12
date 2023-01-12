@@ -94,6 +94,7 @@ anchors_preset = 0
 script = SubResource("GDScript_6o0tv")
 
 [node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
 offset_left = -868.0
 offset_top = -514.0
 offset_right = 1439.0
@@ -112,6 +113,7 @@ libraries = {
 
 [node name="Mask" type="ColorRect" parent="."]
 modulate = Color(1, 1, 1, 0)
+layout_mode = 0
 offset_left = -868.0
 offset_top = -514.0
 offset_right = 1439.0
