@@ -10,7 +10,7 @@ var board = 256
 var hight = 16
 
 var noise
-var noise_seed = 0
+var noise_seed = randi_range(0,999999999)
 var octaves = 3 # 4
 var period = 25 # 20.0
 var persistence = 0.8
@@ -21,7 +21,7 @@ func _ready():
 	noise = FastNoiseLite.new()
 	noise.noise_type = 3
 	#randomize()
-	#noise.seed = noise_seed
+	noise.seed = noise_seed
 	#noise.fractal_octaves = octaves
 	#noise.frequency = period
 	#noise.fractal_ping_pong_strength = persistence
