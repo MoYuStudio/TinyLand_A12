@@ -128,7 +128,6 @@ anchors_preset = 0
 script = SubResource("GDScript_jutev")
 
 [node name="Mask" type="ColorRect" parent="."]
-layout_mode = 0
 offset_left = -868.0
 offset_top = -514.0
 offset_right = 1439.0
@@ -143,7 +142,6 @@ libraries = {
 [node name="Icon" type="Button" parent="."]
 modulate = Color(1, 1, 1, 0.784314)
 texture_filter = 1
-layout_mode = 0
 offset_left = 188.0
 offset_top = -70.0
 offset_right = 452.0
@@ -157,7 +155,6 @@ script = SubResource("GDScript_y1s7a")
 
 [node name="Title" type="Label" parent="."]
 texture_filter = 1
-layout_mode = 0
 offset_left = 170.0
 offset_top = 85.0
 offset_right = 470.0
@@ -170,7 +167,6 @@ vertical_alignment = 1
 
 [node name="Start" type="Button" parent="."]
 texture_filter = 1
-layout_mode = 0
 offset_left = 270.0
 offset_top = 200.0
 offset_right = 370.0
@@ -183,7 +179,6 @@ script = SubResource("GDScript_cf3qh")
 
 [node name="Setting" type="Button" parent="."]
 texture_filter = 1
-layout_mode = 0
 offset_left = 270.0
 offset_top = 230.0
 offset_right = 370.0
@@ -196,7 +191,6 @@ script = SubResource("GDScript_1q6nd")
 
 [node name="Quit" type="Button" parent="."]
 texture_filter = 1
-layout_mode = 0
 offset_left = 270.0
 offset_top = 260.0
 offset_right = 370.0

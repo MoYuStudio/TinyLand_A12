@@ -30,7 +30,7 @@ func _ready():
 	for x in range(board):
 		for z in range(board):
 			for y in range(hight):
-				var the_noise = noise.get_noise_3d(x,y,z)*16
+				var the_noise = noise.get_noise_3d(x,y,z)*32
 				if the_noise <= 0 and get_cell_item (Vector3(x,the_noise+1,z)) == -1:
 					set_cell_item(Vector3(x,the_noise,z),2,0)
 					
