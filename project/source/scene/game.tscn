@@ -61,6 +61,8 @@ _data = {
 [node name="Game" type="Node3D"]
 script = SubResource("GDScript_mah7m")
 
+[node name="WorldEnvironment" parent="." instance=ExtResource("1_0t4if")]
+
 [node name="Mask" type="ColorRect" parent="."]
 offset_left = -868.0
 offset_top = -514.0
@@ -72,8 +74,6 @@ color = Color(0, 0, 0, 1)
 libraries = {
 "": SubResource("AnimationLibrary_kc2e7")
 }
-
-[node name="WorldEnvironment" parent="." instance=ExtResource("1_0t4if")]
 
 [node name="Camera" parent="." instance=ExtResource("2_7wigx")]
 transform = Transform3D(-0.241922, 0, -0.970296, 0, 1, 0, 0.970296, 0, -0.241922, 20, 65, 65)
