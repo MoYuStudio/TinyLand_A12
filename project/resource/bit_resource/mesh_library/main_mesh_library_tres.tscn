@@ -1,13 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://ildidhst2had"]
+[gd_scene load_steps=8 format=3 uid="uid://ildidhst2had"]
 
 [ext_resource type="ArrayMesh" uid="uid://c4ftb5m1sb50a" path="res://resource/graphics/block/0.obj" id="1_6cbkg"]
 [ext_resource type="ArrayMesh" uid="uid://khb2k5lvje65" path="res://resource/graphics/block/1.obj" id="2_80d8r"]
 [ext_resource type="ArrayMesh" uid="uid://sfvvg3eed8f0" path="res://resource/graphics/block/4.obj" id="3_6y7gw"]
 [ext_resource type="ArrayMesh" uid="uid://dghlv0s0ihu4x" path="res://resource/graphics/block/test_building.obj" id="4_pnig5"]
 [ext_resource type="ArrayMesh" uid="uid://dhmnrqfqewtf8" path="res://resource/graphics/block/129.obj" id="5_k7nvx"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uqtac"]
-roughness = 0.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_v8p7u"]
 size = Vector3(1.6, 1.6, 1.6)
@@ -19,7 +16,6 @@ albedo_color = Color(1, 0.858824, 0.329412, 1)
 
 [node name="0" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
-material_overlay = SubResource("StandardMaterial3D_uqtac")
 mesh = ExtResource("1_6cbkg")
 
 [node name="StaticBody" type="StaticBody3D" parent="0"]

@@ -272,7 +272,7 @@ frequency = 0.049
 offset = Vector3(-1.39534e+08, 1.36364e+08, 0)
 fractal_type = 3
 fractal_octaves = 1
-fractal_ping_pong_strength = 2.193
+fractal_ping_pong_strength = 1.826
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_b1nni"]
 width = 128
@@ -393,5 +393,6 @@ shadow_enabled = true
 script = SubResource("GDScript_yyiph")
 
 [node name="SunLight_bata" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.995056, 0.0993197, 0, -0.0993197, 0.995056, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.994522, 0.104528, 0, -0.104528, 0.994522, 0, 0, 0)
+light_energy = 1.6
 shadow_enabled = true
