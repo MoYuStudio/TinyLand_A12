@@ -47,7 +47,7 @@ func _process(delta):
 	if collision_point != Vector3(0,0,0):
 		var pos = local_to_map(Vector3i(collision_point))
 		# print(pos)
-		set_cell_item(Vector3(pos.x,pos.y-1,pos.z),0,0)
+		set_cell_item(Vector3(pos.x,pos.y-1,pos.z),3,0)
 "
 
 [node name="GridMap" type="GridMap"]
