@@ -210,7 +210,7 @@ script = SubResource("GDScript_p07je")
 [node name="Background" type="Node3D" parent="."]
 
 [node name="Camera" type="Camera3D" parent="Background"]
-transform = Transform3D(-0.587785, 0, -0.809017, 0, 1, 0, 0.809017, 0, -0.587785, 15.7423, 12.7766, 19.7688)
+transform = Transform3D(-0.587785, 0, -0.809017, 0, 1, 0, 0.809017, 0, -0.587785, 15.742, 20, 19.769)
 script = SubResource("GDScript_xeqqj")
 
 [node name="WorldEnvironment" parent="Background" instance=ExtResource("2_4f7yj")]

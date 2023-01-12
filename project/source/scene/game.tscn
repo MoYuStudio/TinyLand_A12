@@ -76,6 +76,7 @@ libraries = {
 [node name="WorldEnvironment" parent="." instance=ExtResource("1_0t4if")]
 
 [node name="Camera" parent="." instance=ExtResource("2_7wigx")]
+transform = Transform3D(-0.241922, 0, -0.970296, 0, 1, 0, 0.970296, 0, -0.241922, 20, 65, 65)
 
 [node name="GridMap" parent="." instance=ExtResource("3_bbj6m")]
 
