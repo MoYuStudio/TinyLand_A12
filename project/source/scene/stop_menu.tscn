@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://blhiffqgf5ppu"]
+[gd_scene load_steps=5 format=3 uid="uid://blhiffqgf5ppu"]
 
 [ext_resource type="FontFile" uid="uid://ckmyjvou4nb1f" path="res://resource/graphics/font/kenney_pixel.ttf" id="1_xvc0f"]
 
@@ -40,18 +40,6 @@ func _ready():
 func _process(delta):
 	if is_pressed():
 		get_tree().change_scene_to_file('res://source/scene/start_menu.tscn')
-"
-
-[sub_resource type="GDScript" id="GDScript_ndojl"]
-script/source = "
-extends Button
-
-func _ready():
-	pass
-
-func _process(delta):
-	if is_pressed():
-		get_tree().quit()
 "
 
 [node name="StopMenu" type="Control"]
@@ -101,14 +89,3 @@ theme_override_fonts/font = ExtResource("1_xvc0f")
 theme_override_font_sizes/font_size = 32
 text = "Menu"
 script = SubResource("GDScript_lxnts")
-
-[node name="ESC" type="Button" parent="."]
-texture_filter = 1
-offset_left = 567.0
-offset_top = 9.0
-offset_right = 631.0
-offset_bottom = 44.0
-theme_override_fonts/font = ExtResource("1_xvc0f")
-theme_override_font_sizes/font_size = 32
-text = "ESC"
-script = SubResource("GDScript_ndojl")
