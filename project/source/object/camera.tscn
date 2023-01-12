@@ -91,6 +91,11 @@ func _physics_process(delta):
 		if Input.is_action_pressed('Shift'):
 			input.y -= 1
 			
+		if Input.is_action_pressed('Ctrl'):
+			move_speed = 1.6
+		else:
+			move_speed = 0.6
+			
 		input = input.normalized()
 		
 		# get the forward and right directions
