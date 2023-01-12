@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://scu2p0nq2806"]
+
+[sub_resource type="GDScript" id="GDScript_g3mwf"]
+script/source = "
+extends Button
+
+func _ready():
+	pass
+
+func _process(delta):
+	if is_pressed():
+		get_tree().change_scene_to_file('res://source/scene/start_menu.tscn')
+"
+
+[node name="SettingMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Setting" type="Label" parent="."]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 28.0
+offset_right = 351.0
+offset_bottom = 54.0
+text = "Setting
+"
+
+[node name="Save" type="Button" parent="."]
+layout_mode = 0
+offset_left = 284.0
+offset_top = 307.0
+offset_right = 386.0
+offset_bottom = 338.0
+text = "Save"
+script = SubResource("GDScript_g3mwf")

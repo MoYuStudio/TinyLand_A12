@@ -1,3 +1,19 @@
-[gd_scene format=3 uid="uid://da83a1jtuybi2"]
+[gd_scene load_steps=2 format=3 uid="uid://da83a1jtuybi2"]
 
-[node name="Init" type="Node3D"]
+[ext_resource type="Texture2D" uid="uid://bu85k5gv4l0xf" path="res://resource/graphics/logo/logo.png" id="1_ggvi4"]
+
+[node name="Init" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Background" type="ColorRect" parent="."]
+offset_left = -868.0
+offset_top = -514.0
+offset_right = 1439.0
+offset_bottom = 846.0
+color = Color(0, 0, 0, 1)
+
+[node name="Logo" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(320, 170)
+texture = ExtResource("1_ggvi4")
