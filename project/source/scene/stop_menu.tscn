@@ -57,6 +57,7 @@ offset_left = -649.0
 offset_top = -396.0
 offset_right = 1304.0
 offset_bottom = 729.0
+color = Color(0, 0, 0, 0.392157)
 
 [node name="Continue" type="Button" parent="."]
 texture_filter = 1
@@ -68,6 +69,7 @@ offset_bottom = 141.0
 theme_override_fonts/font = ExtResource("1_xvc0f")
 theme_override_font_sizes/font_size = 32
 text = "Continue"
+flat = true
 script = SubResource("GDScript_l45y7")
 
 [node name="Setting" type="Button" parent="."]
@@ -80,6 +82,7 @@ offset_bottom = 194.0
 theme_override_fonts/font = ExtResource("1_xvc0f")
 theme_override_font_sizes/font_size = 32
 text = "Setting"
+flat = true
 script = SubResource("GDScript_keetg")
 
 [node name="Menu" type="Button" parent="."]
@@ -92,4 +95,5 @@ offset_bottom = 248.0
 theme_override_fonts/font = ExtResource("1_xvc0f")
 theme_override_font_sizes/font_size = 32
 text = "Menu"
+flat = true
 script = SubResource("GDScript_lxnts")

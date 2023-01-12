@@ -17,6 +17,8 @@ boot_splash/show_image=false
 boot_splash/fullsize=false
 boot_splash/use_filter=false
 config/icon="res://resource/graphics/logo/icon.png"
+config/macos_native_icon="res://resource/graphics/steam/icon_mac.icns"
+config/windows_native_icon="res://resource/graphics/steam/icon_win256.ico"
 
 [display]
 
