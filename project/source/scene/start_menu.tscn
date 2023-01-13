@@ -51,7 +51,7 @@ func _process(delta):
 	else:
 		rotation_degrees = 0
 	if is_pressed():
-		get_tree().change_scene_to_file('res://source/scene/about.tscn')
+		get_tree().change_scene_to_file('res://source/scene/about_menu.tscn')
 "
 
 [sub_resource type="GDScript" id="GDScript_cf3qh"]

@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://scu2p0nq2806"]
+[gd_scene load_steps=3 format=3 uid="uid://scu2p0nq2806"]
+
+[ext_resource type="FontFile" uid="uid://ckmyjvou4nb1f" path="res://resource/graphics/font/kenney_pixel.ttf" id="1_pwo85"]
 
 [sub_resource type="GDScript" id="GDScript_g3mwf"]
 script/source = "
@@ -22,26 +24,42 @@ grow_vertical = 2
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 0
-offset_left = -507.0
-offset_top = -315.0
-offset_right = 1090.0
-offset_bottom = 693.0
+offset_left = -624.0
+offset_top = -278.0
+offset_right = 973.0
+offset_bottom = 730.0
 color = Color(0, 0, 0, 1)
 
 [node name="Setting" type="Label" parent="."]
 layout_mode = 0
-offset_left = 296.0
-offset_top = 28.0
-offset_right = 351.0
-offset_bottom = 54.0
+offset_left = 253.0
+offset_top = 26.0
+offset_right = 397.0
+offset_bottom = 77.0
+theme_override_fonts/font = ExtResource("1_pwo85")
+theme_override_font_sizes/font_size = 64
 text = "Setting
 "
 
+[node name="Info" type="Label" parent="."]
+texture_filter = 1
+offset_left = 122.0
+offset_top = 231.0
+offset_right = 458.0
+offset_bottom = 282.0
+rotation = -0.258309
+theme_override_fonts/font = ExtResource("1_pwo85")
+theme_override_font_sizes/font_size = 48
+text = "Nothing at this moment !   ;D"
+
 [node name="Save" type="Button" parent="."]
 layout_mode = 0
-offset_left = 284.0
-offset_top = 307.0
-offset_right = 386.0
-offset_bottom = 338.0
+offset_left = 507.0
+offset_top = 303.0
+offset_right = 609.0
+offset_bottom = 334.0
+theme_override_fonts/font = ExtResource("1_pwo85")
+theme_override_font_sizes/font_size = 32
 text = "Save"
+flat = true
 script = SubResource("GDScript_g3mwf")
