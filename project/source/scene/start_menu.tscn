@@ -206,6 +206,19 @@ text = "Quit"
 flat = true
 script = SubResource("GDScript_p07je")
 
+[node name="Ver" type="Label" parent="."]
+texture_filter = 1
+offset_left = 221.0
+offset_top = 302.0
+offset_right = 416.0
+offset_bottom = 347.0
+theme_override_fonts/font = ExtResource("1_g161a")
+theme_override_font_sizes/font_size = 16
+text = "MoYuStuido 2023
+TinyLand A12    Power BY Godot 4.0 bata11
+a2023011301"
+horizontal_alignment = 1
+
 [node name="Background" type="Node3D" parent="."]
 
 [node name="Camera" type="Camera3D" parent="Background"]

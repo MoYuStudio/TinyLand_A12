@@ -107,7 +107,7 @@ theme_override_fonts/font = ExtResource("7_vfiph")
 theme_override_font_sizes/font_size = 16
 text = "MoYuStuido 2023
 TinyLand A12    Power BY Godot 4.0 bata11
-a2023011201"
+a2023011301"
 horizontal_alignment = 1
 
 [node name="StopMenu" parent="GUI" instance=ExtResource("8_8ijyi")]
