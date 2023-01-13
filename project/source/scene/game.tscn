@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://ye1hxsh2ci36" path="res://source/object/world_environment.tscn" id="1_0t4if"]
 [ext_resource type="PackedScene" uid="uid://deyci4scpxkr8" path="res://source/object/camera.tscn" id="2_7wigx"]
 [ext_resource type="PackedScene" uid="uid://gl3daikwgbaj" path="res://source/object/gridmap.tscn" id="3_bbj6m"]
-[ext_resource type="PackedScene" uid="uid://bmifio0amciep" path="res://source/object/water.tscn" id="4_6wnvc"]
+[ext_resource type="PackedScene" uid="uid://cjjxpcc0lohca" path="res://source/object/water.tscn" id="4_6wnvc"]
 [ext_resource type="Texture2D" uid="uid://do4ks8ackpthp" path="res://resource/graphics/ui/aim_point.png" id="5_632i4"]
 [ext_resource type="Texture2D" uid="uid://cwnjpooy64nlw" path="res://resource/graphics/tile/0.png" id="6_n0si4"]
 [ext_resource type="FontFile" uid="uid://ckmyjvou4nb1f" path="res://resource/graphics/font/kenney_pixel.ttf" id="7_vfiph"]
@@ -78,9 +78,9 @@ libraries = {
 [node name="Camera" parent="." instance=ExtResource("2_7wigx")]
 transform = Transform3D(-0.241922, 0, -0.970296, 0, 1, 0, 0.970296, 0, -0.241922, 20, 65, 65)
 
-[node name="GridMap" parent="." instance=ExtResource("3_bbj6m")]
-
 [node name="Water" parent="." instance=ExtResource("4_6wnvc")]
+
+[node name="GridMap" parent="." instance=ExtResource("3_bbj6m")]
 
 [node name="GUI" type="CanvasLayer" parent="."]
 
