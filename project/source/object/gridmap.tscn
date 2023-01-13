@@ -6,7 +6,7 @@
 script/source = "
 extends GridMap
 
-var board = 256
+var board = 128
 var hight = 16
 
 var noise
@@ -27,8 +27,8 @@ func _ready():
 	#noise.fractal_ping_pong_strength = persistence
 	
 	
-	for x in range(board):
-		for z in range(board):
+	for x in range(-board,board):
+		for z in range(-board,board):
 			for y in range(hight):
 				var the_noise = noise.get_noise_3d(x,y,z)*32
 				if the_noise <= 0 and get_cell_item (Vector3(x,the_noise+1,z)) == -1:

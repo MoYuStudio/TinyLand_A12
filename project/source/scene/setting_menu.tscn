@@ -43,6 +43,7 @@ text = "Setting
 
 [node name="Info" type="Label" parent="."]
 texture_filter = 1
+layout_mode = 0
 offset_left = 122.0
 offset_top = 231.0
 offset_right = 458.0

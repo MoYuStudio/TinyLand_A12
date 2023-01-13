@@ -51,6 +51,7 @@ func _input(event):
 			#	print(raycast[i])
 		
 func _process(delta):
+	var camera_pos = position
 	
 	if mouse_lock == true:
 		# rotate the camera along the x axis
