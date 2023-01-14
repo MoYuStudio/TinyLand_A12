@@ -1,57 +1,64 @@
 [gd_scene load_steps=3 format=3 uid="uid://gl3daikwgbaj"]
 
-[ext_resource type="MeshLibrary" uid="uid://co2fihrhl0fs4" path="res://resource/bit_resource/mesh_library/main_mesh_library.tres" id="1_vgfjx"]
+[ext_resource type="MeshLibrary" uid="uid://dtxjhtc4gpex3" path="res://resource/bit_resource/mesh_library/main_mesh_library.tres" id="1_vgfjx"]
 
 [sub_resource type="GDScript" id="GDScript_i6g6p"]
 script/source = "
 extends GridMap
 
-var board = 128
-var hight = 16
+var board = 96
+var hight = 96
 
 var noise
 var noise_seed = randi_range(0,999999999)
-var octaves = 3 # 4
-var period = 25 # 20.0
-var persistence = 0.8
 
 var collision_point = Vector3(0,0,0)
 
 func _ready():
 	noise = FastNoiseLite.new()
 	noise.noise_type = 3
-	#randomize()
 	noise.seed = noise_seed
-	#noise.fractal_octaves = octaves
-	#noise.frequency = period
-	#noise.fractal_ping_pong_strength = persistence
 	
 	
 	for x in range(-board,board):
 		for z in range(-board,board):
 			for y in range(hight):
-				var the_noise = noise.get_noise_3d(x,y,z)*32
-				if the_noise <= 0 and get_cell_item (Vector3(x,the_noise+1,z)) == -1:
-					set_cell_item(Vector3(x,the_noise,z),2,0)
+				if y == 0:
+					set_cell_item(Vector3(x,y,z),3,0)
+				if y < noise.get_noise_3d(x,y,z)*96+24:
+					if 0 <= y and y < 10:
+						set_cell_item(Vector3(x,y,z),3,0)
+					if 10 <= y and y < 25:
+						set_cell_item(Vector3(x,y,z),2,0)
+					if 25 <= y and y < 45:
+						set_cell_item(Vector3(x,y,z),0,0)
+					if 45 <= y and y < 50:
+						set_cell_item(Vector3(x,y,z),1,0)
+					if 50 <= y and y < 1000:
+						set_cell_item(Vector3(x,y,z),3,0)
+				
+				#else:
+				#	set_cell_item(Vector3(x,y,z),1,0)
+				#if the_noise <= 0 and get_cell_item (Vector3(x,the_noise+1,z)) == -1:
+				#	set_cell_item(Vector3(x,the_noise,z),2,0)
 					
-				elif get_cell_item (Vector3(x,the_noise+1,z)) == -1:
-					set_cell_item(Vector3(x,the_noise,z),0,0)
+				#elif get_cell_item (Vector3(x,the_noise+1,z)) == -1:
+				#	set_cell_item(Vector3(x,the_noise,z),0,0)
 					#if randi_range(0,10) == 2:
 					#	set_cell_item(Vector3(x,the_noise+1,z),4,0)
 					#	set_cell_item(Vector3(x,the_noise,z),0,0)
-				else:
-					set_cell_item(Vector3(x,the_noise,z),1,0)
-					
+				#else:
+				#	set_cell_item(Vector3(x,the_noise,z),1,0)
 					
 func _process(delta):
 	if collision_point != Vector3(0,0,0):
 		var pos = local_to_map(Vector3i(collision_point))
 		# print(pos)
-		set_cell_item(Vector3(pos.x,pos.y-1,pos.z),3,0)
+		set_cell_item(Vector3(pos.x,pos.y-1,pos.z),0,0)
 "
 
 [node name="GridMap" type="GridMap"]
 mesh_library = ExtResource("1_vgfjx")
-cell_size = Vector3(1.6, 1.6, 1.6)
+cell_size = Vector3(1.6, 0.4, 1.6)
 collision_mask = 3
 script = SubResource("GDScript_i6g6p")

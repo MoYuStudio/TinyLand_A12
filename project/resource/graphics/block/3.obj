@@ -4,7 +4,7 @@
 o 
 
 # material
-mtllib 1.mtl
+mtllib 3.mtl
 usemtl palette
 
 # normals
@@ -16,7 +16,7 @@ vn 0 -1 0
 vn 0 1 0
 
 # texcoords
-vt 0.369141 0.5
+vt 0.974609 0.5
 
 # verts
 v 0 2 0

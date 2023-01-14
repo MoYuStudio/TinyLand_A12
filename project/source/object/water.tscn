@@ -60,7 +60,7 @@ void fragment() {
 render_priority = 0
 shader = SubResource("Shader_7d65s")
 shader_parameter/out_color = Color(0, 0.921569, 1, 0.792157)
-shader_parameter/amount = 0.8
+shader_parameter/amount = 0.6
 shader_parameter/speed = 1.0
 shader_parameter/beer_factor = 0.0
 shader_parameter/metallic = 0.6
