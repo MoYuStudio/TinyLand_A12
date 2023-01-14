@@ -30,11 +30,11 @@ func _ready():
 						set_cell_item(Vector3(x,y,z),3,0)
 					if 10 <= y and y < 25:
 						set_cell_item(Vector3(x,y,z),2,0)
-					if 25 <= y and y < 45:
+					if 25 <= y and y < 40:
 						set_cell_item(Vector3(x,y,z),0,0)
-					if 45 <= y and y < 50:
+					if 40 <= y and y < 45:
 						set_cell_item(Vector3(x,y,z),1,0)
-					if 50 <= y and y < 1000:
+					if 45 <= y and y < 1000:
 						set_cell_item(Vector3(x,y,z),3,0)
 				
 				#else:
