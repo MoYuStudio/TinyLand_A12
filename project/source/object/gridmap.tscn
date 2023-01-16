@@ -19,7 +19,6 @@ func _ready():
 	noise.noise_type = 3
 	noise.seed = noise_seed
 	
-	
 	for x in range(-board,board):
 		for z in range(-board,board):
 			for y in range(hight):
@@ -37,24 +36,11 @@ func _ready():
 					if 45 <= y and y < 1000:
 						set_cell_item(Vector3(x,y,z),3,0)
 				
-				#else:
-				#	set_cell_item(Vector3(x,y,z),1,0)
-				#if the_noise <= 0 and get_cell_item (Vector3(x,the_noise+1,z)) == -1:
-				#	set_cell_item(Vector3(x,the_noise,z),2,0)
-					
-				#elif get_cell_item (Vector3(x,the_noise+1,z)) == -1:
-				#	set_cell_item(Vector3(x,the_noise,z),0,0)
-					#if randi_range(0,10) == 2:
-					#	set_cell_item(Vector3(x,the_noise+1,z),4,0)
-					#	set_cell_item(Vector3(x,the_noise,z),0,0)
-				#else:
-				#	set_cell_item(Vector3(x,the_noise,z),1,0)
-					
 func _process(delta):
 	if collision_point != Vector3(0,0,0):
 		var pos = local_to_map(Vector3i(collision_point))
 		# print(pos)
-		set_cell_item(Vector3(pos.x,pos.y-4,pos.z),0,0)
+		set_cell_item(Vector3(pos.x,pos.y-5,pos.z),4,0)
 "
 
 [node name="GridMap" type="GridMap"]

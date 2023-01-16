@@ -6,18 +6,19 @@ extends Camera3D
 
 var move_speed = 0.6
 
-# cam look
+# 相机视角
 var minLookAngle : float = -90.0
 var maxLookAngle : float = 90.0
 var lookSensitivity : float = 30.0
 
-# vectors
+# 向量
 var moveing_vel = Vector3()
 var mouse_delta = Vector2()
 var mouse_pos = Vector2()
 
-var ray_length = 600
+var ray_length = 16
 var collision_point = Vector3(0,0,0)
+var motion_point = Vector3(0,0,0)
 
 var mouse_lock = true
 
@@ -28,57 +29,59 @@ func _ready():
 func _input(event):
 	
 	if mouse_lock == true:
+		
 		if event is InputEventMouse:
 			mouse_pos = event.position
 			
 		if event is InputEventMouseMotion:
 			mouse_delta = event.relative
 			
-		if event is InputEventMouseButton and event.pressed and event.button_index == 1:
-			var center = get_viewport().size
-			var space = get_world_3d().direct_space_state
-			var ray_pos = PhysicsRayQueryParameters3D.new()
-			ray_pos.from = project_ray_origin(mouse_pos)
-			ray_pos.to = project_position(mouse_pos, ray_length)
-			ray_pos.exclude = []
-			ray_pos.collision_mask = 1
-			var raycast = space.intersect_ray(ray_pos)
-			# print(raycast)
-			if raycast != {}:
-				# print(raycast.values()[1])
-				collision_point = Vector3((raycast.values()[0].x),(raycast.values()[0].y),(raycast.values()[0].z))
-			#for i in raycast:
-			#	print(raycast[i])
-		
-func _process(delta):
-	var camera_pos = position
-	
-	if mouse_lock == true:
-		# rotate the camera along the x axis
-		rotation_degrees.x -= mouse_delta.y * lookSensitivity * delta
-
-		# clamp camera x rotation axis
-		rotation_degrees.x = clamp(rotation_degrees.x, minLookAngle, maxLookAngle)
-
-		# rotate the player along their y-axis
-		rotation_degrees.y -= mouse_delta.x * lookSensitivity * delta
-
-		# reset the mouseDelta vector
-		mouse_delta = Vector2()
+		#if event is InputEventMouseButton and event.pressed and event.button_index == 1:
+			
 
 func _physics_process(delta):
+	
+	var camera_pos = position
 	
 	if mouse_lock == true:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		
-		# reset the x and z velocity
+		var center = get_viewport().size
+		var space = get_world_3d().direct_space_state
+		var ray_pos = PhysicsRayQueryParameters3D.new()
+		ray_pos.from = project_ray_origin(mouse_pos)
+		ray_pos.to = project_position(mouse_pos, ray_length)
+		ray_pos.exclude = []
+		ray_pos.collision_mask = 1
+		var raycast = space.intersect_ray(ray_pos)
+		# print(raycast)
+		if raycast != {}:
+			# print(raycast.values()[1])
+			collision_point = Vector3((raycast.values()[0].x),(raycast.values()[0].y),(raycast.values()[0].z))
+			print(collision_point)
+		#for i in raycast:
+		#	print(raycast[i])
+		
+		# 沿x轴旋转相机
+		rotation_degrees.x -= mouse_delta.y * lookSensitivity * delta
+
+		# 夹紧相机x旋转轴
+		rotation_degrees.x = clamp(rotation_degrees.x, minLookAngle, maxLookAngle)
+
+		# 沿 y 轴旋转玩家
+		rotation_degrees.y -= mouse_delta.x * lookSensitivity * delta
+
+		# 重置 mouseDelta 向量
+		mouse_delta = Vector2()
+		
+		# 重置 x y z 速度
 		moveing_vel.x = 0
 		moveing_vel.y = 0
 		moveing_vel.z = 0
 		
 		var input = Vector3()
 		
-		# movement inputs
+		# 输入
 		if Input.is_action_pressed('W'):
 			input.z -= 1
 		if Input.is_action_pressed('S'):
@@ -99,13 +102,13 @@ func _physics_process(delta):
 			
 		input = input.normalized()
 		
-		# get the forward and right directions
+		# 获得前进和正确的方向
 		var forward = global_transform.basis.z
 		var right = global_transform.basis.x
 		
 		var relativeDir = (forward * input.z + right * input.x)
 		
-		# set the velocity
+		# 设置速度
 		moveing_vel.x = relativeDir.x * move_speed
 		moveing_vel.y = input.y * move_speed
 		moveing_vel.z = relativeDir.z * move_speed
