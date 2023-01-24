@@ -6,7 +6,7 @@
 [ext_resource type="ArrayMesh" uid="uid://tuady0psa8i8" path="res://resource/graphics/block/3.obj" id="4_loamy"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_v8p7u"]
-size = Vector3(1.6, 0.4, 1.6)
+size = Vector3(1.4, 0.2, 1.4)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x8o8j"]
 transparency = 1

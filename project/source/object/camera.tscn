@@ -4,6 +4,8 @@
 script/source = "
 extends Camera3D
 
+@onready var raycast = $RayCast
+
 var move_speed = 0.6
 
 # 相机视角
@@ -18,7 +20,7 @@ var mouse_pos = Vector2()
 
 var ray_length = 16
 var collision_point = Vector3(0,0,0)
-var motion_point = Vector3(0,0,0)
+var collision_side = Vector3(0,0,0)
 
 var mouse_lock = true
 
@@ -30,8 +32,8 @@ func _input(event):
 	
 	if mouse_lock == true:
 		
-		if event is InputEventMouse:
-			mouse_pos = event.position
+		#if event is InputEventMouse:
+		#	mouse_pos = event.position
 			
 		if event is InputEventMouseMotion:
 			mouse_delta = event.relative
@@ -46,19 +48,31 @@ func _physics_process(delta):
 	if mouse_lock == true:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		
-		var center = get_viewport().size
-		var space = get_world_3d().direct_space_state
-		var ray_pos = PhysicsRayQueryParameters3D.new()
-		ray_pos.from = project_ray_origin(mouse_pos)
-		ray_pos.to = project_position(mouse_pos, ray_length)
-		ray_pos.exclude = []
-		ray_pos.collision_mask = 1
-		var raycast = space.intersect_ray(ray_pos)
+		if raycast.is_colliding():
+			var pos = raycast.get_collision_point()
+			var norm = raycast.get_collision_normal()
+			# emit_signal(\"highlight_block\", pos, norm)
+			if Input.is_action_just_pressed('Left_Click'):
+				print(\"Click\")
+				print(pos, norm)
+			elif Input.is_action_just_pressed('Right_Click'):
+				print(\"right_click\")
+		
+		#var center = get_viewport().size
+		#var space = get_world_3d().direct_space_state
+		#var ray_pos = PhysicsRayQueryParameters3D.new()
+		#ray_pos.from = project_ray_origin(mouse_pos)
+		#ray_pos.to = project_position(mouse_pos, ray_length)
+		#ray_pos.exclude = []
+		#ray_pos.collision_mask = 1
+		#var raycast = space.intersect_ray(ray_pos)
+		
 		# print(raycast)
-		if raycast != {}:
+		#if raycast != {}:
 			# print(raycast.values()[1])
-			collision_point = Vector3((raycast.values()[0].x),(raycast.values()[0].y),(raycast.values()[0].z))
-			print(collision_point)
+		#	collision_point = Vector3((raycast.values()[0].x),(raycast.values()[0].y),(raycast.values()[0].z))
+		#	collision_side = Vector3((raycast.values()[1].x),(raycast.values()[1].y),(raycast.values()[1].z))
+		#	print(collision_point,collision_side)
 		#for i in raycast:
 		#	print(raycast[i])
 		
@@ -152,6 +166,9 @@ size = Vector2(16, 16)
 [node name="Camera" type="Camera3D"]
 fov = 85.0
 script = SubResource("GDScript_k0qoa")
+
+[node name="RayCast" type="RayCast3D" parent="."]
+target_position = Vector3(2.08165e-12, -1, 2.08165e-12)
 
 [node name="Pixel" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -1)
