@@ -170,7 +170,8 @@ fov = 85.0
 script = SubResource("GDScript_k0qoa")
 
 [node name="RayCast" type="RayCast3D" parent="."]
-target_position = Vector3(2.08165e-12, -1, 2.08165e-12)
+target_position = Vector3(2.08165e-12, 2.08165e-12, -35)
+collide_with_areas = true
 
 [node name="Pixel" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -1)
