@@ -55,6 +55,8 @@ func _physics_process(delta):
 			if Input.is_action_just_pressed('Left_Click'):
 				print(\"Click\")
 				print(pos, norm)
+				collision_point = pos
+				collision_side = norm
 			elif Input.is_action_just_pressed('Right_Click'):
 				print(\"right_click\")
 		

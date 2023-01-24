@@ -43,8 +43,8 @@ func _process(delta):
 			var pos = local_to_map(Vector3i(collision_point))
 			# print(pos)
 			set_cell_item(Vector3(pos.x + collision_side.x,
-								pos.y - 5 + collision_side.y,
-								pos.z + 1 + collision_side.z),4,0)
+								pos.y -4 + collision_side.y,#-5
+								pos.z +1 + collision_side.z),4,0)#+1
 "
 
 [node name="GridMap" type="GridMap"]
