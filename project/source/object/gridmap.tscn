@@ -14,6 +14,7 @@ var noise_seed = randi_range(0,999999999)
 
 var collision_point = Vector3(0,0,0)
 var collision_side = Vector3(0,0,0)
+var collision_type
 
 func _ready():
 	noise = FastNoiseLite.new()
@@ -42,9 +43,14 @@ func _process(delta):
 		if collision_point != Vector3(0,0,0):
 			var pos = local_to_map(Vector3i(collision_point))
 			# print(pos)
-			set_cell_item(Vector3(pos.x + collision_side.x,
-								pos.y -4 + collision_side.y,#-5
-								pos.z +1 + collision_side.z),4,0)#+1
+			if collision_type == 'Right_Click':
+				set_cell_item(Vector3(pos.x + collision_side.x,
+									pos.y -4 + collision_side.y,#-5
+									pos.z +1 + collision_side.z),-1,0)#+1
+			elif collision_type == 'Left_Click':
+				set_cell_item(Vector3(pos.x + collision_side.x,
+									pos.y -4 + collision_side.y,#-5
+									pos.z +1 + collision_side.z),4,0)#+1
 "
 
 [node name="GridMap" type="GridMap"]

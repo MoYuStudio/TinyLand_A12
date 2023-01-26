@@ -21,6 +21,7 @@ var mouse_pos = Vector2()
 var ray_length = 16
 var collision_point = Vector3(0,0,0)
 var collision_side = Vector3(0,0,0)
+var collision_type
 
 var mouse_lock = true
 
@@ -53,12 +54,17 @@ func _physics_process(delta):
 			var norm = raycast.get_collision_normal()
 			# emit_signal(\"highlight_block\", pos, norm)
 			if Input.is_action_just_pressed('Left_Click'):
-				print(\"Click\")
+				print('Left_Click')
 				print(pos, norm)
 				collision_point = pos
 				collision_side = norm
+				collision_type = 'Left_Click'
 			elif Input.is_action_just_pressed('Right_Click'):
-				print(\"right_click\")
+				print('Right_Click')
+				print(pos, norm)
+				collision_point = pos
+				collision_side = norm
+				collision_type = 'Right_Click'
 		
 		#var center = get_viewport().size
 		#var space = get_world_3d().direct_space_state
@@ -172,7 +178,7 @@ fov = 85.0
 script = SubResource("GDScript_k0qoa")
 
 [node name="RayCast" type="RayCast3D" parent="."]
-target_position = Vector3(2.08165e-12, 2.08165e-12, -35)
+target_position = Vector3(0, 0, -10)
 collide_with_areas = true
 
 [node name="Pixel" type="MeshInstance3D" parent="."]
