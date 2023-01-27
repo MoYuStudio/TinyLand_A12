@@ -24,7 +24,7 @@ _surfaces = [{
 
 [sub_resource type="GDScript" id="GDScript_olckw"]
 script/source = "
-@tool
+# @tool
 extends MeshInstance3D
 
 @export var x_size = 64
