@@ -1,6 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://scu2p0nq2806"]
+[gd_scene load_steps=5 format=3 uid="uid://scu2p0nq2806"]
 
 [ext_resource type="FontFile" uid="uid://ckmyjvou4nb1f" path="res://resource/graphics/font/kenney_pixel.ttf" id="1_pwo85"]
+[ext_resource type="PackedScene" uid="uid://fx1hxuoksmee" path="res://source/animation/transition_1.tscn" id="1_w7uvh"]
+
+[sub_resource type="GDScript" id="GDScript_8khru"]
+script/source = "
+extends Control
+
+func _ready():
+	$Transition/AnimationPlayer.play('init')
+	await $Transition/AnimationPlayer.animation_finished
+
+func _process(delta):
+	pass
+"
 
 [sub_resource type="GDScript" id="GDScript_g3mwf"]
 script/source = "
@@ -21,6 +34,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = SubResource("GDScript_8khru")
+
+[node name="Transition" parent="." instance=ExtResource("1_w7uvh")]
+layout_mode = 0
+offset_left = -1492.0
+offset_top = -792.0
+offset_right = 815.0
+offset_bottom = 568.0
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 0

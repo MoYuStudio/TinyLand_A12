@@ -1,5 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://ctkuy3s4wxgux"]
+[gd_scene load_steps=13 format=3 uid="uid://ctkuy3s4wxgux"]
 
+[ext_resource type="PackedScene" uid="uid://fx1hxuoksmee" path="res://source/animation/transition_1.tscn" id="1_7q4ie"]
 [ext_resource type="FontFile" uid="uid://ckmyjvou4nb1f" path="res://resource/graphics/font/kenney_pixel.ttf" id="1_g161a"]
 [ext_resource type="Texture2D" uid="uid://cj1fgv4cxwc8v" path="res://resource/graphics/logo/icon.png" id="1_w430s"]
 [ext_resource type="PackedScene" uid="uid://ye1hxsh2ci36" path="res://source/object/world_environment.tscn" id="2_4f7yj"]
@@ -11,32 +12,12 @@ script/source = "
 extends Control
 
 func _ready():
-	$Mask/AnimationPlayer.play('init')
-	await $Mask/AnimationPlayer.animation_finished
+	$Transition/AnimationPlayer.play('init')
+	# await $Transition/AnimationPlayer.animation_finished
 
 func _process(delta):
 	pass
 "
-
-[sub_resource type="Animation" id="Animation_tf50e"]
-resource_name = "init"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_kc2e7"]
-_data = {
-"init": SubResource("Animation_tf50e")
-}
 
 [sub_resource type="GDScript" id="GDScript_y1s7a"]
 script/source = "
@@ -126,18 +107,12 @@ layout_mode = 3
 anchors_preset = 0
 script = SubResource("GDScript_jutev")
 
-[node name="Mask" type="ColorRect" parent="."]
+[node name="Transition" parent="." instance=ExtResource("1_7q4ie")]
 layout_mode = 0
-offset_left = -868.0
-offset_top = -514.0
-offset_right = 1439.0
-offset_bottom = 846.0
-color = Color(0, 0, 0, 1)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Mask"]
-libraries = {
-"": SubResource("AnimationLibrary_kc2e7")
-}
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 2307.0
+offset_bottom = 1360.0
 
 [node name="Icon" type="Button" parent="."]
 modulate = Color(1, 1, 1, 0.784314)
@@ -232,3 +207,4 @@ script = SubResource("GDScript_xeqqj")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, 0)
 
 [node name="GridMap" parent="Background" instance=ExtResource("3_wdtul")]
+visible = false
